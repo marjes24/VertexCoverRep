@@ -3,7 +3,6 @@
 
 #include <list>
 #include <vector>
-#include <utility>
 
 struct TreeNode{
 	TreeNode* right_child;
@@ -13,8 +12,7 @@ struct TreeNode{
 
 	std::vector<int> cover_Vertex;
 
-	std::vector<std::pair<int,int> > current_covered_edges;
-
 };
 
-#endif   
+
+#endif
