@@ -1,7 +1,6 @@
 //Original Program
 
-#include "Tree.h"
-#include "functions.h"
+#include "TreeSearch.h"
 #include <list>
 #include <stack>
 #include <iostream>

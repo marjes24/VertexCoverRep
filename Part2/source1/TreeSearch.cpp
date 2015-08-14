@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "TreeSearch.h"
 #include <list>
 #include <stack>
 #include <iostream>
@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <utility>
 #include <string>
+
+using namespace std;
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	vector<int> curr_min_cover(1000);//initiliaze for initial comparison //maybe fill it to max_int value?
