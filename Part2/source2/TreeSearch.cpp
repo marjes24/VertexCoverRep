@@ -26,9 +26,13 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		node_stack.pop();
 
 		//check if node has cover, compare to new cover to find min cover
-		if(checkVertices(graph, tmp->cover_Vertex, edge_count) && tmp->cover_Vertex.size()<= curr_min_cover.size()){
+		/*if(checkVertices(graph, tmp->cover_Vertex, edge_count) && tmp->cover_Vertex.size()<= curr_min_cover.size()){
 			curr_min_cover = tmp->cover_Vertex; //return tmp->cover_Vertex;
-		}
+		}*/
+			
+		cout<<tmp->current_covered_edges.size()<<endl;
+		if(tmp->current_covered_edges.size() == edge_count && tmp->cover_Vertex.size()<= curr_min_cover.size())
+			curr_min_cover = tmp->cover_Vertex;
 
 		if(tmp->graph.size()!=0 && !(tmp->cover_Vertex.size()>curr_min_cover.size()) ){ //backtrack if no more nodes or if the node cover gest to big
 
@@ -38,6 +42,9 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 
 			TreeNode* right = new TreeNode;
 			TreeNode* left = new TreeNode;
+			right->current_covered_edges = tmp -> current_covered_edges;
+			left->current_covered_edges = tmp -> current_covered_edges;
+
 
 			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
 			
@@ -55,6 +62,8 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 				//if(!inVector(right->cover_Vertex, (*vertex_it)))
 					right->cover_Vertex.push_back((*vertex_it));
 			}
+
+			update_child_covered_edges(current_largest,right,left);
 
 			make_child_graph(tmp_graph, right, left, current_largest);//make graph for both right and left chld
 
@@ -217,6 +226,32 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 			right->graph = right_graph;
 			left->graph = tmp_graph;
 }
+
+void update_child_covered_edges(std::list<std::list<int> >::iterator &current_largest, TreeNode* right, TreeNode* left ){
+	list<int>::iterator horizontal_iterator = (*current_largest).begin();
+	int first = (*horizontal_iterator);
+	++horizontal_iterator;
+	for(horizontal_iterator; horizontal_iterator != (*current_largest).end(); ++horizontal_iterator){
+
+		int second = (*horizontal_iterator);
+		int a,b;
+		if(second < first){
+			a = second;
+			b = first;
+		}
+		else{
+			a = first;
+			b = second;
+		}
+
+		pair<int,int> pair1(a,b);
+		if(!inVector(right->current_covered_edges,pair1))
+			right->current_covered_edges.push_back(pair1);
+		if(!inVector(left->current_covered_edges,pair1))
+			left->current_covered_edges.push_back(pair1);
+	}
+}
+
 
 void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
 	string first_arg = argv[1];
