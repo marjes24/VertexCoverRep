@@ -30,7 +30,6 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			curr_min_cover = tmp->cover_Vertex; //return tmp->cover_Vertex;
 		}*/
 			
-		cout<<tmp->current_covered_edges.size()<<endl;
 		if(tmp->current_covered_edges.size() == edge_count && tmp->cover_Vertex.size()<= curr_min_cover.size())
 			curr_min_cover = tmp->cover_Vertex;
 
@@ -63,7 +62,7 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 					right->cover_Vertex.push_back((*vertex_it));
 			}
 
-			update_child_covered_edges(current_largest,right,left);
+			update_child_covered_edges(current_largest,right,left, graph);
 
 			make_child_graph(tmp_graph, right, left, current_largest);//make graph for both right and left chld
 
@@ -227,7 +226,8 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 			left->graph = tmp_graph;
 }
 
-void update_child_covered_edges(std::list<std::list<int> >::iterator &current_largest, TreeNode* right, TreeNode* left ){
+void update_child_covered_edges(std::list<std::list<int> >::iterator &current_largest, TreeNode* right, TreeNode* left, list<list<int> > &graph ){
+	//update left child covered edges
 	list<int>::iterator horizontal_iterator = (*current_largest).begin();
 	int first = (*horizontal_iterator);
 	++horizontal_iterator;
@@ -245,11 +245,43 @@ void update_child_covered_edges(std::list<std::list<int> >::iterator &current_la
 		}
 
 		pair<int,int> pair1(a,b);
-		if(!inVector(right->current_covered_edges,pair1))
-			right->current_covered_edges.push_back(pair1);
 		if(!inVector(left->current_covered_edges,pair1))
 			left->current_covered_edges.push_back(pair1);
 	}
+
+	//udpate right child covered edges
+	vector<int> vertices_to_search;
+	for(list<int>::iterator i = (*current_largest).begin(); i != (*current_largest).end(); ++i){
+		vertices_to_search.push_back((*i));
+	}
+
+	for(list<list<int> >::iterator it = graph.begin(); it != graph.end(); it++){
+
+		list<int>::iterator it1 = (*it).begin();
+		int first = (*it1);
+
+		if(inVector(vertices_to_search,(*it1))){
+			it1++;
+			for(it1; it1 != (*it).end(); it1++){
+
+				int second = (*it1);
+				int a,b;
+				if(second < first){
+					a = second;
+					b = first;
+				}
+				else{
+					a = first;
+					b = second;
+				}
+
+				pair<int,int> pair1(a,b);
+				if(!inVector(right->current_covered_edges,pair1))
+					right->current_covered_edges.push_back(pair1);
+			}
+		}
+	}
+
 }
 
 
