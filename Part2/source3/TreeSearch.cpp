@@ -45,7 +45,7 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			left->current_covered_edges = tmp -> current_covered_edges;
 
 
-			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph, tmp);
+			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
 			
 			right->cover_Vertex = tmp->cover_Vertex;
 			left->cover_Vertex = tmp->cover_Vertex;
@@ -143,7 +143,7 @@ bool checkVertices(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_c
 
 }
 
-list<list<int> >::iterator largest_vertex(list<list<int> > &graph, TreeNode *current_node){ //also handles degree one
+list<list<int> >::iterator largest_vertex(list<list<int> > &graph){
 
 	list<list<int> >::iterator current_largest = graph.begin();
 	list<list<int> >::iterator it = graph.begin();	
@@ -158,13 +158,6 @@ list<list<int> >::iterator largest_vertex(list<list<int> > &graph, TreeNode *cur
 		for(element_iterator; element_iterator!=(*it).end(); element_iterator++){
 			++count;
 		}
-
-		//handle degree one vertex
-		if(count == 2){
-			degree_one_optimization(graph, it, current_node);
-		}
-		//done handling degree one
-
 
 		if(count>= largest_count){
 			largest_count = count;
@@ -437,8 +430,5 @@ void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
 }
 
 
-void degree_one_optimization(list<list<int> > &graph, list<list<int> >::iterator V, TreeNode *current_node){
-
-}
 
     
