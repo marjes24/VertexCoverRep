@@ -1,4 +1,5 @@
-//Reworking how program checks if node vector is a cover
+//Original Program
+
 #include "TreeSearch.h"
 #include <list>
 #include <stack>
