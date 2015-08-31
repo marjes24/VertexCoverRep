@@ -30,6 +30,8 @@ std::list<std::list<int> >::iterator largest_vertex(std::list<std::list<int> > &
 
 void make_child_graph(std::list<std::list<int> > &tmp_graph, TreeNode *right, TreeNode *left, std::list<std::list<int> >::iterator current_largest);
 
+int degree(std::list<std::list<int> >::iterator V);
+
 
 
 #endif

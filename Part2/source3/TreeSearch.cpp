@@ -21,32 +21,27 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	node_stack.push(root);
 
 	while(!node_stack.empty()){
-		
+			
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
+		
+		list<list<int> > tmp_graph = tmp->graph;
+		list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
 
-		//check if node has cover, compare to new cover to find min cover
-		if(checkVertices(graph, tmp->cover_Vertex, edge_count) && tmp->cover_Vertex.size()<= curr_min_cover.size()){
-			curr_min_cover = tmp->cover_Vertex; //return tmp->cover_Vertex;
-		}
-
-		if(tmp->graph.size()!=0 && !(tmp->cover_Vertex.size()>curr_min_cover.size()) ){ //backtrack if no more nodes or if the node cover gest to big
-
-			//make two new tree nodes left and right, push right and then left
-			//first search tmp node's graph for highest degree
-			list<list<int> > tmp_graph = tmp->graph;
-
+		if(degree(current_largest) == 0){
+			if(checkVertices(graph,tmp->cover_Vertex,edge_count) && tmp->cover_Vertex.size()<=curr_min_cover.size())
+				curr_min_cover = tmp->cover_Vertex;
+			++leaf_count;
+			continue;
+		} else{
 			TreeNode* right = new TreeNode;
 			TreeNode* left = new TreeNode;
 
-			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
-			
 			right->cover_Vertex = tmp->cover_Vertex;
 			left->cover_Vertex = tmp->cover_Vertex;
 
 			list<int>::iterator vertex_it = (*current_largest).begin();
-
-			//vertex is in
+			
 			if(!inVector(left->cover_Vertex, (*vertex_it)))
 				left->cover_Vertex.push_back((*vertex_it));
 			//neighbors are in	
@@ -55,23 +50,19 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 				//if(!inVector(right->cover_Vertex, (*vertex_it)))
 					right->cover_Vertex.push_back((*vertex_it));
 			}
-
+			
 			make_child_graph(tmp_graph, right, left, current_largest);//make graph for both right and left chld
-
+			
 			tmp->right_child = right;
 			tmp->left_child = left;
-
+ 
 			node_stack.push(right);
 			node_stack.push(left);
-		
-		} else{
-			++leaf_count;//be careful, this variable is global
-		}
 
+		}
+		
 		delete tmp;//free memory 
 	}
-	//return empty vector
-	//vector<int> empty;
 	return curr_min_cover;
 }
 
@@ -362,6 +353,15 @@ void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
 
 }
 
+int degree(list<list<int> >::iterator V){
+	list<int>::iterator it = (*V).begin();
+	int count = 0;
 
+	++it;
+	for(it; it != (*V).end(); ++it){
+		++count;
+	}
+	return count;
+}
 
     
