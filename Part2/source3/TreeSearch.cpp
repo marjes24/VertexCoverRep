@@ -69,7 +69,8 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 				++leaf_count;
 			}
 		} else{
-			if(checkVertices(graph,tmp->cover_Vertex,edge_count) && tmp->cover_Vertex.size()<=curr_min_cover.size())
+			//if(checkVertices(graph,tmp->cover_Vertex,edge_count) && tmp->cover_Vertex.size()<=curr_min_cover.size())
+			if(tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
 		}
