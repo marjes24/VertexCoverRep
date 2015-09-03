@@ -25,42 +25,55 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
 		
-		list<list<int> > tmp_graph = tmp->graph;
-		list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
+		if(tmp->graph.size()>0){
+			list<list<int> > tmp_graph = tmp->graph;
+			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
 
-		if(degree(current_largest) == 0){
+			if(degree(current_largest) == 0){
+				
+				//if(checkVertices(graph,tmp->cover_Vertex,edge_count) && tmp->cover_Vertex.size()<=curr_min_cover.size())
+				if(tmp->cover_Vertex.size()<=curr_min_cover.size())
+					curr_min_cover = tmp->cover_Vertex;
+				++leaf_count;
+				delete tmp;
+				continue;
+
+			} 
+			 else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
+				TreeNode* right = new TreeNode;
+				TreeNode* left = new TreeNode;
+
+				right->cover_Vertex = tmp->cover_Vertex;
+				left->cover_Vertex = tmp->cover_Vertex;
+
+				list<int>::iterator vertex_it = (*current_largest).begin();
+				
+				if(!inVector(left->cover_Vertex, (*vertex_it)))
+					left->cover_Vertex.push_back((*vertex_it));
+				//neighbors are in	
+				vertex_it++;
+				for(vertex_it; vertex_it!=(*current_largest).end(); vertex_it++){//if future errors, come back here!!
+					//if(!inVector(right->cover_Vertex, (*vertex_it)))
+						right->cover_Vertex.push_back((*vertex_it));
+				}
+				
+				make_child_graph(tmp_graph, right, left, current_largest);//make graph for both right and left chld
+				
+				tmp->right_child = right;
+				tmp->left_child = left;
+	 
+				node_stack.push(right);
+				node_stack.push(left);
+
+			} else{
+				++leaf_count;
+			}
+		} else{
 			if(checkVertices(graph,tmp->cover_Vertex,edge_count) && tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
-			continue;
-		} else{
-			TreeNode* right = new TreeNode;
-			TreeNode* left = new TreeNode;
-
-			right->cover_Vertex = tmp->cover_Vertex;
-			left->cover_Vertex = tmp->cover_Vertex;
-
-			list<int>::iterator vertex_it = (*current_largest).begin();
-			
-			if(!inVector(left->cover_Vertex, (*vertex_it)))
-				left->cover_Vertex.push_back((*vertex_it));
-			//neighbors are in	
-			vertex_it++;
-			for(vertex_it; vertex_it!=(*current_largest).end(); vertex_it++){//if future errors, come back here!!
-				//if(!inVector(right->cover_Vertex, (*vertex_it)))
-					right->cover_Vertex.push_back((*vertex_it));
-			}
-			
-			make_child_graph(tmp_graph, right, left, current_largest);//make graph for both right and left chld
-			
-			tmp->right_child = right;
-			tmp->left_child = left;
- 
-			node_stack.push(right);
-			node_stack.push(left);
-
 		}
-		
+
 		delete tmp;//free memory 
 	}
 	return curr_min_cover;
