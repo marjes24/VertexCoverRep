@@ -26,6 +26,8 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		node_stack.pop();
 		
 		if(tmp->graph.size()>0){
+			degree_one_optimization(tmp->graph, tmp);
+
 			list<list<int> > tmp_graph = tmp->graph;
 			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
 
@@ -373,4 +375,37 @@ int degree(list<list<int> >::iterator V){
 	return count;
 }
 
-    
+ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node){
+ 	vector<int> vertices_to_delete;
+ 	list<list<int> >::iterator V = Graph.begin();
+ 	
+ 	for(V; V != Graph.end(); ++V){
+ 		
+ 		if(degree(V) == 1){ //degree 1, insert its neighbor to delete vector
+ 			list<int>::iterator it = (*V).begin();
+ 			++it;
+ 			vertices_to_delete.push_back((*it));
+ 			node->cover_Vertex.push_back((*it));
+ 		}
+ 	}
+
+ 	//delete degree 1 neighbors from graph
+ 	for(list<list<int> >::iterator i = Graph.begin(); i != Graph.end(); ++i){
+		int front_vertex = (*(*i).begin());
+		if(inVector(vertices_to_delete, front_vertex)){//can speed this up
+			list<list<int> >::iterator tmp_delete_it = i;
+			Graph.erase(tmp_delete_it);
+			--i;
+		}
+		else{
+			for(list<int>::iterator i1 = (*i).begin(); i1!=(*i).end(); ++i1){
+				if(inVector(vertices_to_delete, (*i1))){
+					list<int>::iterator tmp_delete_it2 = i1;
+					(*i).erase(tmp_delete_it2);
+					--i1;
+				}
+			}
+		}
+	}
+
+ }   
