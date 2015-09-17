@@ -9,6 +9,7 @@
 #include <string>
 
 using namespace std;
+int node_count = 0;
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	vector<int> curr_min_cover(1000);//initiliaze for initial comparison //maybe fill it to max_int value?
@@ -24,10 +25,17 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
-		
+
+		cout<<"Printing graph before optimization"<<endl;
+		print_graph(tmp->graph);
+
 		if(tmp->graph.size()>0)
 			degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
 
+		cout<<"Printing graph after optimization"<<endl;
+		print_graph(tmp->graph);
+		cout<<"Printing cover vertex"<<endl;
+		print_cover(tmp->cover_Vertex);
 
 		if(tmp->graph.size()>0){
 			list<list<int> > tmp_graph = tmp->graph;
@@ -65,6 +73,8 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	 
 				node_stack.push(right);
 				node_stack.push(left);
+
+				node_count += 2;
 
 			} else
 				++leaf_count;
@@ -123,16 +133,6 @@ bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
 			}
 		}
 	}
-
-	/*cout<<"cover"<<endl;
-	for(int i=0; i<cover_Vertex.size(); i++){
-		cout<<cover_Vertex[i]<<" ";
-	}
-	cout<<endl;
-	cout<<"Covered Edges"<<endl;
-	for(int i = 0; i<covered_Edges.size(); ++i){
-		cout<<covered_Edges[i].first<<" "<<covered_Edges[i].second<<endl;
-	}*/
 
 	return covered_Edges.size() == edge_count;
 
@@ -385,8 +385,10 @@ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int
 
  		if(degree(V) == 1){ //degree 1, insert its neighbor to delete vector
  			list<int>::iterator it = (*V).begin();
+ 			vertices_to_delete.push_back((*it));
  			++it;
- 			if(!inVector(node->cover_Vertex, (*it))){
+ 			if(!inVector(node->cover_Vertex, (*it)) && !inVector(vertices_to_delete, (*it))) {
+
 		 		vertices_to_delete.push_back((*it));
 		 		node->cover_Vertex.push_back((*it));
 		 	}
@@ -397,7 +399,7 @@ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int
  	//delete degree 1 neighbors from graph
  	for(list<list<int> >::iterator i = Graph.begin(); i != Graph.end(); ++i){
 		int front_vertex = (*(*i).begin());
-		if(inVector(vertices_to_delete, front_vertex)){//can speed this up
+		if(inVector(vertices_to_delete, front_vertex)){
 			list<list<int> >::iterator tmp_delete_it = i;
 			Graph.erase(tmp_delete_it);
 			--i;
@@ -414,3 +416,19 @@ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int
 	}
 
  }   
+
+ void print_graph(std::list<std::list<int> > &graph){
+ 	for(list<list<int> >::iterator it = graph.begin(); it!= graph.end(); ++it){
+ 		for(list<int>::iterator it_2= (*it).begin(); it_2 != (*it).end(); ++it_2 ){
+ 			cout<<(*it_2)<<" ";
+ 		}
+ 		cout<<endl;
+ 	}
+ }
+
+void print_cover(std::vector<int> &cover){
+	for(int i =0; i<cover.size(); ++i){
+		cout<<cover[i]<<" ";
+	}
+	cout<<endl;
+}

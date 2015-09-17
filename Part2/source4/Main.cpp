@@ -11,7 +11,6 @@
 #include <string>
 
 using namespace std;
-
 int main(int argc, char* argv[]){
 
 	list<list<int> > graph;
@@ -33,7 +32,8 @@ int main(int argc, char* argv[]){
 	} else {
 		cout<<"Cover not found"<<endl;
 	}
-	
+	 
+	cout<<node_count;
 	return 0;
 }
 

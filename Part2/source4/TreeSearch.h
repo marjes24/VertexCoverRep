@@ -4,7 +4,7 @@
 #include <list>
 #include <vector>
 #include <utility>
-
+extern int node_count;//global variable to count nodes
 struct TreeNode{
 	TreeNode* right_child;
 	TreeNode* left_child;
@@ -33,5 +33,9 @@ void make_child_graph(std::list<std::list<int> > &tmp_graph, TreeNode *right, Tr
 int degree(std::list<std::list<int> >::iterator V);
 
 void degree_one_optimization(std::list<std::list<int> > &Graph, TreeNode* Node, std::vector<int> &curr_min_cover, std::list<std::list<int> > &Original_Graph, int edge_count);
+
+void print_graph(std::list<std::list<int> > &graph);
+
+void print_cover(std::vector<int> &cover);
 
 #endif
