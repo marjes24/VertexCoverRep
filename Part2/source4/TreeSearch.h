@@ -32,6 +32,6 @@ void make_child_graph(std::list<std::list<int> > &tmp_graph, TreeNode *right, Tr
 
 int degree(std::list<std::list<int> >::iterator V);
 
-void degree_one_optimization(std::list<std::list<int> > &Graph, TreeNode* Node);
+void degree_one_optimization(std::list<std::list<int> > &Graph, TreeNode* Node, std::vector<int> &curr_min_cover, std::list<std::list<int> > &Original_Graph, int edge_count);
 
 #endif

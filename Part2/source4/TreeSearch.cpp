@@ -25,9 +25,11 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
 		
-		if(tmp->graph.size()>0){
-			degree_one_optimization(tmp->graph, tmp);
+		if(tmp->graph.size()>0)
+			degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
 
+
+		if(tmp->graph.size()>0){
 			list<list<int> > tmp_graph = tmp->graph;
 			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
 
@@ -64,10 +66,9 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 				node_stack.push(right);
 				node_stack.push(left);
 
-			} else{
+			} else
 				++leaf_count;
-			}
-		} else{
+		} else {
 			if(tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
@@ -164,60 +165,59 @@ list<list<int> >::iterator largest_vertex(list<list<int> > &graph){
 }
 
 void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *left, list<list<int> >::iterator current_largest){
-			//right graph and delete v and v's neighbors
-			list<list<int> > right_graph = tmp_graph;
+	//right graph and delete v and v's neighbors
+	list<list<int> > right_graph = tmp_graph;
 
-			vector<int> right_graph_to_delete;
-			for(list<int>::iterator i = (*current_largest).begin(); i != (*current_largest).end(); ++i){
-				int v_to_delete = (*i);
-				right_graph_to_delete.push_back(v_to_delete);
-			}
+	vector<int> right_graph_to_delete;
+	for(list<int>::iterator i = (*current_largest).begin(); i != (*current_largest).end(); ++i){
+		int v_to_delete = (*i);
+		right_graph_to_delete.push_back(v_to_delete);
+	}
 
-			for(list<list<int> >::iterator i = right_graph.begin(); i != right_graph.end(); ++i){
-				int front_vertex = (*(*i).begin());
-				if(inVector(right_graph_to_delete, front_vertex)){//can speed this up
-					list<list<int> >::iterator tmp_delete_it = i;
-					right_graph.erase(tmp_delete_it);
-					--i;
-				}
-				else{
-					for(list<int>::iterator i1 = (*i).begin(); i1!=(*i).end(); ++i1){
-						if(inVector(right_graph_to_delete, (*i1))){
-							list<int>::iterator tmp_delete_it2 = i1;
-							(*i).erase(tmp_delete_it2);
-							--i1;
-						}
-					}
+	for(list<list<int> >::iterator i = right_graph.begin(); i != right_graph.end(); ++i){
+		int front_vertex = (*(*i).begin());
+		if(inVector(right_graph_to_delete, front_vertex)){//can speed this up
+			list<list<int> >::iterator tmp_delete_it = i;
+			right_graph.erase(tmp_delete_it);
+			--i;
+		}
+		else{
+			for(list<int>::iterator i1 = (*i).begin(); i1!=(*i).end(); ++i1){
+				if(inVector(right_graph_to_delete, (*i1))){
+					list<int>::iterator tmp_delete_it2 = i1;
+					(*i).erase(tmp_delete_it2);
+					--i1;
 				}
 			}
+		}
+	}
 
 
-			//delete V
+	//delete V
 
-			int deleted_vertex = (*(*current_largest).begin());
+	int deleted_vertex = (*(*current_largest).begin());
 
-			tmp_graph.erase(current_largest);
+	tmp_graph.erase(current_largest);
+
+	//delete V from adjacency list
+	list<list<int> >::iterator it1=tmp_graph.begin(); 
+	list<int>::iterator it2;
+
+	for(it1; it1 != tmp_graph.end(); it1++){
+		for(it2 = (*it1).begin(); it2 != (*it1).end(); it2++){
+
+			if((*it2) == deleted_vertex){
+				list<int>::iterator it3 = it2;
+				(*it1).erase(it3); 
+				it2--;
+			}
 			
-			//delete V from adjacency list
-			list<list<int> >::iterator it1=tmp_graph.begin(); 
-			list<int>::iterator it2;
 
-			for(it1; it1 != tmp_graph.end(); it1++){
-				for(it2 = (*it1).begin(); it2 != (*it1).end(); it2++){
+		}
+	}
 
-					if((*it2) == deleted_vertex){
-						list<int>::iterator it3 = it2;
-						(*it1).erase(it3); 
-						it2--;
-					}
-					
-
-				}
-			}
-
-
-			right->graph = right_graph;
-			left->graph = tmp_graph;
+	right->graph = right_graph;
+	left->graph = tmp_graph;
 }
 
 void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
@@ -375,19 +375,24 @@ int degree(list<list<int> >::iterator V){
 	return count;
 }
 
- void degree_one_optimization(list<list<int> > &Graph, TreeNode* node){
+void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int> &curr_min_cover, list<list<int> > &Original_Graph, int edge_count){
  	vector<int> vertices_to_delete;
  	list<list<int> >::iterator V = Graph.begin();
  	
+	
  	for(V; V != Graph.end(); ++V){
  		
+
  		if(degree(V) == 1){ //degree 1, insert its neighbor to delete vector
  			list<int>::iterator it = (*V).begin();
  			++it;
- 			vertices_to_delete.push_back((*it));
- 			node->cover_Vertex.push_back((*it));
- 		}
+ 			if(!inVector(node->cover_Vertex, (*it))){
+		 		vertices_to_delete.push_back((*it));
+		 		node->cover_Vertex.push_back((*it));
+		 	}
+	 	}
  	}
+ 	
 
  	//delete degree 1 neighbors from graph
  	for(list<list<int> >::iterator i = Graph.begin(); i != Graph.end(); ++i){
