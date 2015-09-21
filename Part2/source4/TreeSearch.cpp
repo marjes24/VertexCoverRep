@@ -26,16 +26,16 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
 
-		cout<<"Printing graph before optimization"<<endl;
-		print_graph(tmp->graph);
+		/*cout<<"Printing graph before optimization"<<endl;
+		print_graph(tmp->graph);*/
 
 		if(tmp->graph.size()>0)
 			degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
 
-		cout<<"Printing graph after optimization"<<endl;
+		/*cout<<"Printing graph after optimization"<<endl;
 		print_graph(tmp->graph);
 		cout<<"Printing cover vertex"<<endl;
-		print_cover(tmp->cover_Vertex);
+		print_cover(tmp->cover_Vertex);*/
 
 		if(tmp->graph.size()>0){
 			list<list<int> > tmp_graph = tmp->graph;
