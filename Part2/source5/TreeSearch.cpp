@@ -15,75 +15,51 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	vector<int> curr_min_cover(1000);//initiliaze for initial comparison //maybe fill it to max_int value?
 	
 	stack<TreeNode*> node_stack;
-	
 	TreeNode* root = new TreeNode;
 	root->graph = graph;
-
 	node_stack.push(root);
 
-	while(!node_stack.empty()){
-			
+	while(!node_stack.empty()){		
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
 
-		/*cout<<"Printing graph before optimization"<<endl;
-		print_graph(tmp->graph);*/
+		degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
 
-		if(tmp->graph.size()>0)
-			degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
+		list<list<int> >::iterator current_largest = largest_vertex(tmp->graph);
 
-		/*cout<<"Printing graph after optimization"<<endl;
-		print_graph(tmp->graph);
-		cout<<"Printing cover vertex"<<endl;
-		print_cover(tmp->cover_Vertex);*/
-
-		if(tmp->graph.size()>0){
-			list<list<int> > tmp_graph = tmp->graph;
-			list<list<int> >::iterator current_largest = largest_vertex(tmp_graph);
-
-			if(degree(current_largest) == 0){
-				if(tmp->cover_Vertex.size()<=curr_min_cover.size())
-					curr_min_cover = tmp->cover_Vertex;
-				++leaf_count;
-				delete tmp;
-				continue;
-			} 
-			 else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
-				TreeNode* right = new TreeNode;
-				TreeNode* left = new TreeNode;
-
-				right->cover_Vertex = tmp->cover_Vertex;
-				left->cover_Vertex = tmp->cover_Vertex;
-
-				list<int>::iterator vertex_it = (*current_largest).begin();
-				
-				//v is in
-				if(!inVector(left->cover_Vertex, (*vertex_it)))
-					left->cover_Vertex.push_back((*vertex_it));
-				//neighbors are in	
-				vertex_it++;
-				for(vertex_it; vertex_it!=(*current_largest).end(); vertex_it++){
-						right->cover_Vertex.push_back((*vertex_it));
-				}
-				
-				make_child_graph(tmp_graph, right, left, current_largest);//make graph for both right and left chld
-				
-				tmp->right_child = right;
-				tmp->left_child = left;
-	 
-				node_stack.push(right);
-				node_stack.push(left);
-
-				node_count += 2;
-
-			} else
-				++leaf_count;
-		} else {
+		if(degree(current_largest, tmp->graph) == 0){
 			if(tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
-		}
-		delete tmp;//free memory 
+			delete tmp;
+			continue;
+		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
+			TreeNode* right = new TreeNode;
+			TreeNode* left = new TreeNode;
+
+			right->cover_Vertex = tmp->cover_Vertex;
+			left->cover_Vertex = tmp->cover_Vertex;
+
+			list<int>::iterator vertex_it = (*current_largest).begin();
+			
+			//v is in
+			if(!inVector(left->cover_Vertex, (*vertex_it)))
+				left->cover_Vertex.push_back((*vertex_it));
+			//neighbors are in	
+			vertex_it++;
+			for(vertex_it; vertex_it!=(*current_largest).end(); vertex_it++){
+				right->cover_Vertex.push_back((*vertex_it));
+			}
+			
+			make_child_graph(tmp->graph, right, left, current_largest);//make graph for both right and left chld
+ 
+			node_stack.push(right);
+			node_stack.push(left);
+
+			node_count += 2;
+
+			} else
+				++leaf_count;
 	}
 	return curr_min_cover;
 }
@@ -364,15 +340,11 @@ void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
 
 }
 
-int degree(list<list<int> >::iterator V){
-	list<int>::iterator it = (*V).begin();
-	int count = 0;
-
-	++it;
-	for(it; it != (*V).end(); ++it){
-		++count;
-	}
-	return count;
+int degree(list<list<int> >::iterator V, list<list<int> > &Graph){
+	if(Graph.size() == 0)
+		return 0;
+	else
+		return (*V).size() - 1;
 }
 
 void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int> &curr_min_cover, list<list<int> > &Original_Graph, int edge_count){
@@ -383,13 +355,12 @@ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int
 		degree_one_found = false;
 	 	list<list<int> >::iterator V = Graph.begin();	
 	 	for(V; V != Graph.end(); ++V){
-	 		if(degree(V) == 1){ //degree 1, insert its neighbor to delete vector
+	 		if(degree(V, Graph) == 1){ //degree 1, insert its neighbor to delete vector
 	 			degree_one_found = true;
 	 			list<int>::iterator it = (*V).begin();
 	 			vertices_to_delete.push_back((*it));
 	 			++it;
 	 			if(!inVector(node->cover_Vertex, (*it)) && !inVector(vertices_to_delete, (*it))) {
-
 			 		vertices_to_delete.push_back((*it));
 			 		node->cover_Vertex.push_back((*it));
 			 	}
@@ -421,7 +392,7 @@ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int
 
  }   
 
- void print_graph(std::list<std::list<int> > &graph){
+void print_graph(std::list<std::list<int> > &graph){
  	for(list<list<int> >::iterator it = graph.begin(); it!= graph.end(); ++it){
  		for(list<int>::iterator it_2= (*it).begin(); it_2 != (*it).end(); ++it_2 ){
  			cout<<(*it_2)<<" ";

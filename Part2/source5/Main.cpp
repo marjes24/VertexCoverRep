@@ -33,7 +33,6 @@ int main(int argc, char* argv[]){
 		cout<<"Cover not found"<<endl;
 	}
 	 
-	cout<<node_count;
 	return 0;
 }
 

@@ -6,13 +6,8 @@
 #include <utility>
 extern int node_count;//global variable to count nodes
 struct TreeNode{
-	TreeNode* right_child;
-	TreeNode* left_child;
-
 	std::list<std::list<int> > graph;
-
 	std::vector<int> cover_Vertex;
-
 };
 
 
@@ -30,7 +25,7 @@ std::list<std::list<int> >::iterator largest_vertex(std::list<std::list<int> > &
 
 void make_child_graph(std::list<std::list<int> > &tmp_graph, TreeNode *right, TreeNode *left, std::list<std::list<int> >::iterator current_largest);
 
-int degree(std::list<std::list<int> >::iterator V);
+int degree(std::list<std::list<int> >::iterator V, std::list<std::list<int> > &Graph);
 
 void degree_one_optimization(std::list<std::list<int> > &Graph, TreeNode* Node, std::vector<int> &curr_min_cover, std::list<std::list<int> > &Original_Graph, int edge_count);
 
