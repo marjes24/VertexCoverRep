@@ -7,12 +7,12 @@
 #include <algorithm>
 #include <utility>
 #include <string>
-#include <sys/time.h>
+#include <time.h>
 
 using namespace std;
 int node_count = 0;
-double total_time = 0.0;
-struct timeval start, stop; 
+
+double total_time = 0;
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	vector<int> curr_min_cover(1000);//initiliaze for initial comparison //maybe fill it to max_int value?
@@ -144,24 +144,57 @@ list<list<int> >::iterator largest_vertex(list<list<int> > &graph){
 }
 
 void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *left, list<list<int> >::iterator current_largest){
-	//right graph and delete v and v's neighbors
-	gettimeofday(&start, NULL); 
-	list<list<int> > right_graph = tmp_graph;
-	gettimeofday(&stop, NULL); 
+	//1st update tmp graph to make left graph
+	//delete V
+	list<int> stored_vertex = (*current_largest);
+	int deleted_vertex = (*(*current_largest).begin());
 
-	total_time = total_time + ((stop.tv_sec-start.tv_sec) +0.000001*(stop.tv_usec-start.tv_usec));
-	
+	tmp_graph.erase(current_largest);
+
+	//delete V from adjacency list
+	list<list<int> >::iterator it1=tmp_graph.begin(); 
+	list<int>::iterator it2;
+
+	for(it1; it1 != tmp_graph.end(); it1++){
+		for(it2 = (*it1).begin(); it2 != (*it1).end(); it2++){
+
+			if((*it2) == deleted_vertex){
+				list<int>::iterator it3 = it2;
+				(*it1).erase(it3); 
+				it2--;
+			}
+		}
+	}
+	left->graph = tmp_graph;
+
+
+	//put stored vertex backg into tmp graph
+	tmp_graph.push_back(stored_vertex);
+	int stored_vertex_id = (*(stored_vertex).begin());
+	list<int>::iterator it3 = stored_vertex.begin();
+	++it3;
+	for(it3; it3 != stored_vertex.end();++it3){
+		int vertex_id_to_find = (*it3);
+		for(list<list<int> >::iterator graph_it = tmp_graph.begin(); graph_it != tmp_graph.end(); ++graph_it){
+			int current_vertex_id = (*(*graph_it).begin());
+			if(current_vertex_id == vertex_id_to_find)
+				(*graph_it).push_back(stored_vertex_id);
+		}
+	}
+
+	//update tmp graph to make right graph
+		list<list<int> >::iterator current_largest_copy = --tmp_graph.end(); 
 	vector<int> right_graph_to_delete;
-	for(list<int>::iterator i = (*current_largest).begin(); i != (*current_largest).end(); ++i){
+	for(list<int>::iterator i = (*current_largest_copy).begin(); i != (*current_largest_copy).end(); ++i){
 		int v_to_delete = (*i);
 		right_graph_to_delete.push_back(v_to_delete);
 	}
 
-	for(list<list<int> >::iterator i = right_graph.begin(); i != right_graph.end(); ++i){
+	for(list<list<int> >::iterator i = tmp_graph.begin(); i != tmp_graph.end(); ++i){
 		int front_vertex = (*(*i).begin());
 		if(inVector(right_graph_to_delete, front_vertex)){//can speed this up
 			list<list<int> >::iterator tmp_delete_it = i;
-			right_graph.erase(tmp_delete_it);
+			tmp_graph.erase(tmp_delete_it);
 			--i;
 		}
 		else{
@@ -175,25 +208,8 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 		}
 	}
 
-	//delete V
-	int deleted_vertex = (*(*current_largest).begin());
-	tmp_graph.erase(current_largest);
+	right->graph = tmp_graph;
 
-	//delete V from adjacency list
-	list<list<int> >::iterator it1=tmp_graph.begin(); 
-	list<int>::iterator it2;
-
-	for(it1; it1 != tmp_graph.end(); it1++){
-		for(it2 = (*it1).begin(); it2 != (*it1).end(); it2++){
-			if((*it2) == deleted_vertex){
-				list<int>::iterator it3 = it2;
-				(*it1).erase(it3); 
-				it2--;
-			}
-		}
-	}
-	right->graph = right_graph;
-	left->graph = tmp_graph;
 }
 
 void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){

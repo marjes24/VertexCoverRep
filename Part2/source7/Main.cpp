@@ -18,7 +18,11 @@ int main(int argc, char* argv[]){
 	int leaf_count = 0;
 	
 	read_graph(graph, edge_count, argv);
-	
+
+	/*list<list<int> >::iterator current_largest = largest_vertex(graph);
+	TreeNode *right = new TreeNode;
+	TreeNode *left = new TreeNode;
+	make_child_graph(graph, right, left, current_largest); */
 	vector<int> answer = DFSCover(graph, edge_count, leaf_count);
 
 	if(isCover(graph, answer, edge_count)){
@@ -29,7 +33,6 @@ int main(int argc, char* argv[]){
 
 		cout<<"cover size: "<<answer.size()<<endl;
 		cout<<"leaf count: "<<leaf_count<<endl;
-		cout<<"Total update function copy time: "<< total_time<<endl;
 	} else {
 		cout<<"Cover not found"<<endl;
 	}

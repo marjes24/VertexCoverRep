@@ -5,7 +5,6 @@
 #include <vector>
 #include <utility>
 extern int node_count;//global variable to count nodes
-extern double total_time;
 struct TreeNode{
 	std::list<std::list<int> > graph;
 	std::vector<int> cover_Vertex;
