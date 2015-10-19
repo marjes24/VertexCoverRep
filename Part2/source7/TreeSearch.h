@@ -33,4 +33,6 @@ void print_graph(std::list<std::list<int> > &graph);
 
 void print_cover(std::vector<int> &cover);
 
+void degree_two_optimization(std::list<std::list<int> > &Graph, std::list<std::list<int> >::iterator current_largest, std::vector<int> &curr_min_cover);
+
 #endif

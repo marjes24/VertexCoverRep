@@ -36,6 +36,8 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			++leaf_count;
 			delete tmp;
 			continue;
+		} else if(degree(current_largest, tmp->graph) == 2){
+			degree_two_optimization(tmp->graph, current_largest, curr_min_cover);
 		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
 			TreeNode* right = new TreeNode;
 			TreeNode* left = new TreeNode;
@@ -85,16 +87,12 @@ bool inVector(vector<pair<int,int> > &v, pair<int,int> &p){//overloaded
 
 bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
 	vector<pair<int,int> > covered_Edges;
-
 	for(list<list<int> >::iterator it = graph.begin(); it != graph.end(); it++){
-
 		list<int>::iterator it1 = (*it).begin();
 		int first = (*it1);
-
 		if(inVector(cover_Vertex,(*it1))){
 			it1++;
 			for(it1; it1 != (*it).end(); it1++){
-
 				int second = (*it1);
 				int a,b;
 				if(second < first){
@@ -105,40 +103,30 @@ bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
 					a = first;
 					b = second;
 				}
-
 				pair<int,int> pair1(a,b);
 				if(!inVector(covered_Edges,pair1))
 					covered_Edges.push_back(pair1);
 			}
 		}
 	}
-
 	return covered_Edges.size() == edge_count;
-
 }
 
 list<list<int> >::iterator largest_vertex(list<list<int> > &graph){
-
 	list<list<int> >::iterator current_largest = graph.begin();
 	list<list<int> >::iterator it = graph.begin();	
 	int count = 0;
 	int largest_count=0;
-
 	for(it; it!=graph.end(); it++){
-
 		count = 0;
 		list<int>::iterator element_iterator = (*it).begin();
-
 		for(element_iterator; element_iterator!=(*it).end(); element_iterator++){
 			++count;
 		}
-
 		if(count>= largest_count){
 			largest_count = count;
 			current_largest = it;
-
 		}
-
 	}
 	return current_largest;
 }
@@ -157,7 +145,6 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 
 	for(it1; it1 != tmp_graph.end(); it1++){
 		for(it2 = (*it1).begin(); it2 != (*it1).end(); it2++){
-
 			if((*it2) == deleted_vertex){
 				list<int>::iterator it3 = it2;
 				(*it1).erase(it3); 
@@ -422,4 +409,39 @@ void print_cover(std::vector<int> &cover){
 		cout<<cover[i]<<" ";
 	}
 	cout<<endl;
+}
+
+void degree_two_optimization(list<list<int> > &Graph, list<list<int> >::iterator current_largest, vector<int> &curr_min_cover){
+	vector<int> vertices_to_delete;
+	list<int>::iterator it = (*current_largest).begin();
+	//push neighbors into cover, and store values to delete
+	vertices_to_delete.push_back((*it));
+	++it;
+	for(it; it!=(*current_largest).end(); ++it){
+		if(!inVector(curr_min_cover,(*it))){
+			vertices_to_delete.push_back((*it));
+			curr_min_cover.push_back((*it));
+		}
+	}
+
+	//delete neighbors and V from graph
+	for(list<list<int> >::iterator i = Graph.begin(); i != Graph.end(); ++i){
+		int front_vertex = (*(*i).begin());
+		if(inVector(vertices_to_delete, front_vertex)){
+			list<list<int> >::iterator tmp_delete_it = i;
+			Graph.erase(tmp_delete_it);
+			--i;
+		}
+		else{
+			for(list<int>::iterator i1 = (*i).begin(); i1!=(*i).end(); ++i1){
+				if(inVector(vertices_to_delete, (*i1))){
+					list<int>::iterator tmp_delete_it2 = i1;
+					(*i).erase(tmp_delete_it2);
+					--i1;
+				}
+			}
+		}
+	}
+
+
 }
