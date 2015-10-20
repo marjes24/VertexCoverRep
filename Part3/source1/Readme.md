@@ -1,1 +1,1 @@
-Added while loop to source 1 optimization. clocked influenza at around 14 minutes. Removed an unecessary copy of the graph, sped up to 7 minutes
+Change the update graph function so that two child graphs can be made using the same copy of one graph. First left child is made by inserting largest vertex. Then that vertex is put back and right child is made. 
