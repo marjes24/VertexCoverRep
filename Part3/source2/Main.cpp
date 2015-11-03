@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
 		for(int i = 0; i<answer.size(); ++i){
 			cout<< answer[i]<< " ";
 		}
-
+		cout<<endl;
 		cout<<"cover size: "<<answer.size()<<endl;
 		cout<<"leaf count: "<<leaf_count<<endl;
 	} else {

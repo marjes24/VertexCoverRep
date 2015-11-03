@@ -12,7 +12,6 @@
 
 using namespace std;
 int node_count = 0;
-
 double total_time = 0;
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
@@ -28,17 +27,11 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	while(!node_stack.empty()){		
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
-
-		//degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
-
 		list<list<int> >::iterator current_largest = largest_vertex(tmp->graph);
-
 		if(degree(current_largest, tmp->graph) == 0){
 			if(tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
-			delete tmp;
-			continue;
 		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
 			TreeNode* right = new TreeNode;
 			TreeNode* left = new TreeNode;
@@ -58,14 +51,13 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			}
 			
 			make_child_graph(tmp->graph, right, left, current_largest);//make graph for both right and left chld
- 
-			node_stack.push(right);
+ 			node_stack.push(right);
 			node_stack.push(left);
-
 			node_count += 2;
 
 			} else
 				++leaf_count;
+			delete tmp;
 	}
 	return curr_min_cover;
 }
@@ -88,16 +80,12 @@ bool inVector(vector<pair<int,int> > &v, pair<int,int> &p){//overloaded
 
 bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
 	vector<pair<int,int> > covered_Edges;
-
 	for(list<list<int> >::iterator it = graph.begin(); it != graph.end(); it++){
-
 		list<int>::iterator it1 = (*it).begin();
 		int first = (*it1);
-
 		if(inVector(cover_Vertex,(*it1))){
 			it1++;
 			for(it1; it1 != (*it).end(); it1++){
-
 				int second = (*it1);
 				int a,b;
 				if(second < first){
@@ -108,40 +96,30 @@ bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
 					a = first;
 					b = second;
 				}
-
 				pair<int,int> pair1(a,b);
 				if(!inVector(covered_Edges,pair1))
 					covered_Edges.push_back(pair1);
 			}
 		}
 	}
-
 	return covered_Edges.size() == edge_count;
-
 }
 
 list<list<int> >::iterator largest_vertex(list<list<int> > &graph){
-
 	list<list<int> >::iterator current_largest = graph.begin();
 	list<list<int> >::iterator it = graph.begin();	
 	int count = 0;
 	int largest_count=0;
-
 	for(it; it!=graph.end(); it++){
-
 		count = 0;
 		list<int>::iterator element_iterator = (*it).begin();
-
 		for(element_iterator; element_iterator!=(*it).end(); element_iterator++){
 			++count;
 		}
-
 		if(count>= largest_count){
 			largest_count = count;
 			current_largest = it;
-
 		}
-
 	}
 	return current_largest;
 }

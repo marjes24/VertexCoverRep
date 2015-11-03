@@ -1,5 +1,4 @@
 //Original Program
-
 #include "TreeSearch.h"
 #include <list>
 #include <stack>
@@ -35,8 +34,7 @@ int main(int argc, char* argv[]){
 		cout<<"leaf count: "<<leaf_count<<endl;
 	} else {
 		cout<<"Cover not found"<<endl;
-	}
-	 
+	} 
 	return 0;
 }
 

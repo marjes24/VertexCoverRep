@@ -15,7 +15,7 @@ int node_count = 0;
 double total_time = 0;
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
-	vector<int> curr_min_cover(1000);//initiliaze for initial comparison //maybe fill it to max_int value?
+	vector<int> curr_min_cover(10000);//initiliaze for initial comparison //maybe fill it to max_int value?
 	
 	stack<TreeNode*> node_stack;
 	TreeNode* root = new TreeNode;
@@ -26,7 +26,7 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		TreeNode* tmp =  node_stack.top();
 		node_stack.pop();
 
-		degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
+		degree_one_optimization(tmp->graph, tmp, tmp->cover_Vertex, graph, edge_count);
 
 		list<list<int> >::iterator current_largest = largest_vertex(tmp->graph);
 
@@ -34,8 +34,6 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			if(tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
-			delete tmp;
-			continue;
 		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
 			TreeNode* right = new TreeNode;
 			TreeNode* left = new TreeNode;
@@ -61,8 +59,9 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 
 			node_count += 2;
 
-			} else
-				++leaf_count;
+		} else
+			++leaf_count;
+		delete tmp;
 	}
 	return curr_min_cover;
 }
@@ -112,9 +111,7 @@ bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
 			}
 		}
 	}
-
 	return covered_Edges.size() == edge_count;
-
 }
 
 list<list<int> >::iterator largest_vertex(list<list<int> > &graph){

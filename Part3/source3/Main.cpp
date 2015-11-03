@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
 	int leaf_count = 0;
 	
 	read_graph(graph, edge_count, argv);
-
+	//print_graph(graph);
 	/*list<list<int> >::iterator current_largest = largest_vertex(graph);
 	TreeNode *right = new TreeNode;
 	TreeNode *left = new TreeNode;

@@ -1,6 +1,5 @@
 #ifndef TREESEARCH_H
 #define TREESEARCH_H
-
 #include <list>
 #include <vector>
 #include <utility>
@@ -30,7 +29,5 @@ int degree(std::list<std::list<int> >::iterator V, std::list<std::list<int> > &G
 void degree_one_optimization(std::list<std::list<int> > &Graph, TreeNode* Node, std::vector<int> &curr_min_cover, std::list<std::list<int> > &Original_Graph, int edge_count);
 
 void print_graph(std::list<std::list<int> > &graph);
-
-void print_cover(std::vector<int> &cover);
 
 #endif

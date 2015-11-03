@@ -24,21 +24,21 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 
 	while(!node_stack.empty()){		
 		TreeNode* tmp =  node_stack.top();
-		node_stack.pop();
-
-		degree_one_optimization(tmp->graph, tmp, curr_min_cover, graph, edge_count);
-
+		degree_one_optimization(tmp->graph, tmp,tmp->cover_Vertex, graph, edge_count);		
 		list<list<int> >::iterator current_largest = largest_vertex(tmp->graph);
 
-		if(degree(current_largest, tmp->graph) == 0){
+		if(degree(current_largest, tmp->graph) == 0){ 
 			if(tmp->cover_Vertex.size()<=curr_min_cover.size())
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
+			node_stack.pop();
 			delete tmp;
-			continue;
-		} else if(degree(current_largest, tmp->graph) == 2){
-			degree_two_optimization(tmp->graph, current_largest, curr_min_cover);
-		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){
+			
+		} else if(degree(current_largest, tmp->graph) == 2){		
+			degree_two_optimization(tmp->graph, current_largest, tmp->cover_Vertex);
+
+		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){ 
+			node_stack.pop();
 			TreeNode* right = new TreeNode;
 			TreeNode* left = new TreeNode;
 
@@ -62,9 +62,12 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			node_stack.push(left);
 
 			node_count += 2;
-
-			} else
+			delete tmp;
+			} else{
+				node_stack.pop();
+				delete tmp;
 				++leaf_count;
+			}
 	}
 	return curr_min_cover;
 }
