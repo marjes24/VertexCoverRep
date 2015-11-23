@@ -15,7 +15,8 @@ int node_count = 0;
 double total_time = 0;
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
-	vector<int> curr_min_cover(10000);//initiliaze for initial comparison //maybe fill it to max_int value?
+	int max_int = 10000;
+	vector<int> curr_min_cover(max_int);//initiliaze for initial comparison //maybe fill it to max_int value?
 	
 	stack<TreeNode*> node_stack;
 	TreeNode* root = new TreeNode;
