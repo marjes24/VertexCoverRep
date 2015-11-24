@@ -1,4 +1,4 @@
-#BSUB -J inf40.job
+#BSUB -J inf40
 
 #BSUB -L /bin/bash
 

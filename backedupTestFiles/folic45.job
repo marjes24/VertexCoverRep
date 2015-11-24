@@ -1,10 +1,10 @@
-#BSUB -J inf45
+#BSUB -J folic45
 
 #BSUB -L /bin/bash
 
 #BSUB -W 1:00
 
-#BSUB -o inf45.%J
+#BSUB -o folic45.%J
 
 #BSUB -u mje72@mail.com
 
@@ -15,4 +15,4 @@
 module load intel
 
 # 
-./a.out -l ../../../Vertex-Cover-MPI/data/PVC-Langston-2011/influensa_0.45.dim.dim
+./a.out -l ../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.45.dim.dim
