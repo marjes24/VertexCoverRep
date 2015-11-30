@@ -1,0 +1,18 @@
+#BSUB -J inf30
+
+#BSUB -L /bin/bash
+
+#BSUB -W 1:00
+
+#BSUB -o inf30.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -M 600
+#BSUB -R 'select[nxt]'
+  
+module load intel
+
+# 
+../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/influensa_0.30.dim.dim
