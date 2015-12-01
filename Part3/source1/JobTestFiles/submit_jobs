@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for f in ./*.job
+	do
+		for i in $(seq 01)
+			do bsub < $f
+		done 
+done 
+

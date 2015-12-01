@@ -2,15 +2,18 @@
 
 #BSUB -L /bin/bash
 
-#BSUB -W 1:00
+#BSUB -W 12:00
 
-#BSUB -o inf40.%J
+#BSUB -o ../TestResults/inf40.%J
 
 #BSUB -u mje72@mail.com
 
 #BSUB -n 1
-#BSUB -M 600
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
 #BSUB -R 'select[nxt]'
+  
   
 module load intel
 
