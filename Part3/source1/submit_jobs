@@ -1,9 +1,0 @@
-#!/bin/bash
-
-for f in JobTestFiles/*.job
-	do
-		for i in $(seq 05)
-			do bsub < $f
-		done 
-done 
-
