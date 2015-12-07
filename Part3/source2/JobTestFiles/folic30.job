@@ -2,7 +2,7 @@
 
 #BSUB -L /bin/bash
 
-#BSUB -W 12:00
+#BSUB -W 36:00
 
 #BSUB -o ../TestResults/folic30.%J
 

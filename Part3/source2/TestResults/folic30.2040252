@@ -1,31 +1,30 @@
 	NOTE: As of 4/1/2015, MKLROOT defined in this module has been changed
 	From: /software/easybuild/software/imkl/11.2.2.164-iimpi-7.2.5-GCC-4.9.2
 	  To: /software/easybuild/software/imkl/11.2.2.164-iimpi-7.2.5-GCC-4.9.2/mkl
-cover size: 987
-leaf count: 90544428
+User defined signal 2
 
 ------------------------------------------------------------
-Sender: LSF System <lsfadmin@nxt2141>
-Subject: Job 2038234: <folic45> in cluster <Main_Compute> Done
+Sender: LSF System <lsfadmin@nxt1305>
+Subject: Job 2040252: <folic30> in cluster <Main_Compute> Exited
 
-Job <folic45> was submitted from host <login3> by user <mje72> in cluster <Main_Compute>.
-Job was executed on host(s) <nxt2141>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+Job <folic30> was submitted from host <login5> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1305>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
 </home/mje72> was used as the home directory.
 </home/mje72/VertexCoverRep/Part3/source2/JobTestFiles> was used as the working directory.
-Started at Tue Dec  1 10:47:35 2015
-Results reported on Tue Dec  1 12:53:18 2015
+Started at Wed Dec  2 12:34:42 2015
+Results reported on Thu Dec  3 12:34:45 2015
 
 Your job looked like:
 
 ------------------------------------------------------------
 # LSBATCH: User input
-#BSUB -J folic45
+#BSUB -J folic30
 
 #BSUB -L /bin/bash
 
-#BSUB -W 12:00
+#BSUB -W 24:00
 
-#BSUB -o ../TestResults/folic45.%J
+#BSUB -o ../TestResults/folic30.%J
 
 #BSUB -u mje72@mail.com
 
@@ -39,19 +38,20 @@ Your job looked like:
 module load intel
 
 # 
-../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.45.dim.dim
+../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.30.dim.dim
 
 ------------------------------------------------------------
 
-Successfully completed.
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
 
 Resource usage summary:
 
-    CPU time :                                   7575.01 sec.
-    Max Memory :                                 859 MB
-    Average Memory :                             817.28 MB
+    CPU time :                                   86804.80 sec.
+    Max Memory :                                 1137 MB
+    Average Memory :                             1115.46 MB
     Total Requested Memory :                     5000.00 MB
-    Delta Memory :                               4141.00 MB
+    Delta Memory :                               3863.00 MB
     Max Processes :                              4
     Max Threads :                                5
 
