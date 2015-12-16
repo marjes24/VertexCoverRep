@@ -2,7 +2,7 @@
 
 for f in ./*.job
 	do
-		for i in $(seq 01)
+		for i in $(seq 5)
 			do bsub < $f
 		done 
 done 
