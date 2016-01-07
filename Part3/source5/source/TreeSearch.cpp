@@ -19,17 +19,17 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	vector<int> curr_min_cover(max_int);			//holds smallest cover currently found. To be returned. 
 	
 	//Begin Depth First Search Vertex Cover Algorithm
-	stack<TreeNode*> node_stack;					//stack filled with pointers to tree nodes. Used for DFS.
-	TreeNode* root = new TreeNode;					//First tree node containing original graph. 
-	root->graph = graph;							//Instead of reading graph before function, read here. Take away one less copy??????
+	stack<TreeNode*> node_stack;				//stack filled with pointers to tree nodes. Used for DFS.
+	TreeNode* root = new TreeNode;				//First tree node containing original graph. 
+	root->graph = graph;					//Instead of reading graph before function, read here. Take away one less copy?????
 	node_stack.push(root);
 	
 	//Initialize Variables
-	TreeNode* tmp; 									//tmp is current node being visited in search tree
-	list<list<int> >::iterator V;					// current largest is V. Graph node with highest degree
-	TreeNode *right_child;							//right and left child used when branching. 
+	TreeNode* tmp; 						//tmp is current node being visited in search tree
+	list<list<int> >::iterator V;				// current largest is V. Graph node with highest degree
+	TreeNode *right_child;					//right and left child used when branching. 
 	TreeNode *left_child;
-	list<int>::iterator V_adjacency_list_it; 			//to be used to iterate through the adjacency list of individual vertex
+	list<int>::iterator V_adjacency_list_it; 		//to be used to iterate through the adjacency list of individual vertex
 
 	while(!node_stack.empty()){		
 		tmp =  node_stack.top();
@@ -37,10 +37,10 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 		V = largest_vertex(tmp->graph);
 
 		if(degree(V, tmp->graph) == 0){									
-			if(tmp->cover_Vertex.size()<=curr_min_cover.size())									//don't branch
+			if(tmp->cover_Vertex.size()<=curr_min_cover.size())	//don't branch
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
-		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){								//branch. No need if the current cover is already bigger than the min cover.
+		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){	//branch. No need if the current cover is already bigger than the min cover.
 			right_child = new TreeNode;
 			left_child = new TreeNode;
 			right_child->cover_Vertex = tmp->cover_Vertex;
@@ -48,7 +48,7 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 
 			V_adjacency_list_it = (*V).begin();
 			//v is in cover
-			left_child->cover_Vertex.push_back((*V_adjacency_list_it));							//remember, may have to check if V is in vector...
+			left_child->cover_Vertex.push_back((*V_adjacency_list_it));	//remember, may have to check if V is in vector...
 			//neighbors are in cover
 			V_adjacency_list_it++;
 			for(V_adjacency_list_it; V_adjacency_list_it!=(*V).end(); V_adjacency_list_it++){
@@ -84,11 +84,10 @@ bool inVector(vector<pair<int,int> > &v, pair<int,int> &p){
 
 //check if cover_vertex is a cover of graph. 
 bool isCover(list<list<int> >&graph, vector<int> &cover_Vertex, int edge_count){
-	vector<pair<int,int> > covered_Edges;							//vector filled with edges formed by node in cover vertex and adjacent neighbors (a,b) a > b
-	list<list<int> >::iterator V;									//current vertex
-	list<int>::iterator V_adj_it;									//to iterate adjacency list of V
-	int first, second, a, b;										//first
-
+	vector<pair<int,int> > covered_Edges;		//vector filled with edges formed by node in cover vertex and adjacent neighbors (a,b) a > b
+	list<list<int> >::iterator V;			//current vertex
+	list<int>::iterator V_adj_it;			//to iterate adjacency list of V
+	int first, second, a, b;			//first
 	for( V = graph.begin(); V!= graph.end(); V++){
 		V_adj_it = (*V).begin();
 		first = (*V_adj_it);
@@ -130,18 +129,18 @@ list<list<int> >::iterator largest_vertex(list<list<int> > &graph){
 
 void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *left, list<list<int> >::iterator V){
 	
-	vector<int> right_graph_to_delete;										//store vertices id's to delete for right graph, V and v's neighbors
+	vector<int> right_graph_to_delete;				//store vertices id's to delete for right graph, V and v's neighbors
 	for(list<int>::iterator i = (*V).begin(); i != (*V).end(); ++i){
 		int v_to_delete = (*i);
 		right_graph_to_delete.push_back(v_to_delete);
 	}
 	//1st update tmp graph to make left graph
-	int deleted_vertex = (*(*V).begin());									//delete V from graph
+	int deleted_vertex = (*(*V).begin());				//delete V from graph
 	tmp_graph.erase(V);
 	list<list<int> >::iterator it1=tmp_graph.begin(); 
 	list<int>::iterator it2;
 	list<int>::iterator it3;
-	for(it1; it1 != tmp_graph.end(); it1++){								//delete V from the adjacency list of other vertices
+	for(it1; it1 != tmp_graph.end(); it1++){			//delete V from the adjacency list of other vertices
 		for(it2 = (*it1).begin(); it2 != (*it1).end(); it2++){
 			if((*it2) == deleted_vertex){
 				it3 = it2;
@@ -156,7 +155,7 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 	int front_vertex;
 	list<list<int> >::iterator i, tmp_delete_it;
 	list<int>::iterator i1, tmp_delete_it2;
-	for(i = tmp_graph.begin(); i != tmp_graph.end(); ++i){					//delete a neighbor from the graph
+	for(i = tmp_graph.begin(); i != tmp_graph.end(); ++i){		//delete a neighbor from the graph
 		front_vertex = (*(*i).begin());
 		if(inVector(right_graph_to_delete, front_vertex)){
 			tmp_delete_it = i;
@@ -164,7 +163,7 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 			--i;
 		}
 		else{
-			for(i1 = (*i).begin(); i1!=(*i).end(); ++i1){					//delete neighbor from the adjacency list of other vertices
+			for(i1 = (*i).begin(); i1!=(*i).end(); ++i1){	//delete neighbor from the adjacency list of other vertices
 				if(inVector(right_graph_to_delete, (*i1))){
 					tmp_delete_it2 = i1;
 					(*i).erase(tmp_delete_it2);
