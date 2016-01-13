@@ -1,0 +1,143 @@
+berge
+cover size: 40
+leaf count: 2907
+
+real	0m0.049s
+user	0m0.031s
+sys	0m0.002s
+
+bipartite
+cover size: 3
+leaf count: 3
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
+
+bondy-murty-n7-k4
+cover size: 4
+leaf count: 3
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.002s
+
+bondy-murty-n11-k7
+cover size: 7
+leaf count: 4
+
+real	0m0.018s
+user	0m0.001s
+sys	0m0.002s
+
+bondy-murty-n14-k7
+cover size: 7
+leaf count: 7
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.003s
+
+cube-n8-k4
+cover size: 4
+leaf count: 2
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.001s
+
+dodecahedron-n20-k12
+cover size: 12
+leaf count: 16
+
+real	0m0.004s
+user	0m0.002s
+sys	0m0.001s
+
+folkman-n20-k10
+cover size: 10
+leaf count: 25
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.003s
+
+grotzsch-n11-k6
+cover size: 6
+leaf count: 4
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
+
+herschel-n11-k5
+cover size: 5
+leaf count: 3
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.003s
+
+icosahedron-n12-k9
+cover size: 9
+leaf count: 10
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.003s
+
+octahedron-n6-k4
+cover size: 4
+leaf count: 4
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.001s
+
+petersen-n10-k6
+cover size: 6
+leaf count: 5
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.003s
+
+ransey-n17-k-14
+cover size: 14
+leaf count: 28
+
+real	0m0.004s
+user	0m0.002s
+sys	0m0.001s
+
+tetrahedron-n4-k3
+cover size: 3
+leaf count: 3
+
+real	0m0.004s
+user	0m0.002s
+sys	0m0.001s
+
+thomassen-n34-k20
+cover size: 20
+leaf count: 70
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
+
+tutte-coxeter-n30-k15
+cover size: 15
+leaf count: 37
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.003s
+
+wheel-n8-k5
+cover size: 5
+leaf count: 3
+
+real	0m0.004s
+user	0m0.000s
+sys	0m0.002s
