@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
 
 	list<list<int> > graph;
 	int edge_count = 0;
-	int leaf_count = 0;
+	long int leaf_count = 0;
 	
 	read_graph(graph, edge_count, argv);
 

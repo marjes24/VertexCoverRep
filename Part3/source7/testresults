@@ -1,38 +1,38 @@
 berge
 cover size: 40
-leaf count: 2907
+leaf count: 1945
 
-real	0m0.049s
-user	0m0.031s
-sys	0m0.002s
+real	0m0.110s
+user	0m0.028s
+sys	0m0.003s
 
 bipartite
 cover size: 3
 leaf count: 3
 
 real	0m0.004s
-user	0m0.001s
-sys	0m0.002s
+user	0m0.000s
+sys	0m0.003s
 
 bondy-murty-n7-k4
 cover size: 4
 leaf count: 3
 
 real	0m0.004s
-user	0m0.000s
+user	0m0.001s
 sys	0m0.002s
 
 bondy-murty-n11-k7
 cover size: 7
 leaf count: 4
 
-real	0m0.018s
+real	0m0.021s
 user	0m0.001s
 sys	0m0.002s
 
 bondy-murty-n14-k7
 cover size: 7
-leaf count: 7
+leaf count: 6
 
 real	0m0.004s
 user	0m0.000s
@@ -43,68 +43,68 @@ cover size: 4
 leaf count: 2
 
 real	0m0.004s
-user	0m0.001s
-sys	0m0.001s
+user	0m0.000s
+sys	0m0.003s
 
 dodecahedron-n20-k12
 cover size: 12
-leaf count: 16
-
-real	0m0.004s
-user	0m0.002s
-sys	0m0.001s
-
-folkman-n20-k10
-cover size: 10
-leaf count: 25
+leaf count: 13
 
 real	0m0.004s
 user	0m0.000s
 sys	0m0.003s
 
-grotzsch-n11-k6
-cover size: 6
-leaf count: 4
+folkman-n20-k10
+cover size: 10
+leaf count: 22
 
 real	0m0.004s
-user	0m0.001s
-sys	0m0.002s
+user	0m0.003s
+sys	0m0.000s
+
+grotzsch-n11-k6
+cover size: 6
+leaf count: 3
+
+real	0m0.004s
+user	0m0.002s
+sys	0m0.001s
 
 herschel-n11-k5
 cover size: 5
 leaf count: 3
 
 real	0m0.004s
-user	0m0.000s
-sys	0m0.003s
+user	0m0.001s
+sys	0m0.002s
 
 icosahedron-n12-k9
 cover size: 9
-leaf count: 10
-
-real	0m0.004s
-user	0m0.000s
-sys	0m0.003s
-
-octahedron-n6-k4
-cover size: 4
-leaf count: 4
+leaf count: 8
 
 real	0m0.004s
 user	0m0.001s
-sys	0m0.001s
+sys	0m0.002s
+
+octahedron-n6-k4
+cover size: 4
+leaf count: 3
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
 
 petersen-n10-k6
 cover size: 6
-leaf count: 5
+leaf count: 3
 
 real	0m0.004s
-user	0m0.000s
-sys	0m0.003s
+user	0m0.001s
+sys	0m0.002s
 
 ransey-n17-k-14
 cover size: 14
-leaf count: 28
+leaf count: 18
 
 real	0m0.004s
 user	0m0.002s
@@ -112,23 +112,23 @@ sys	0m0.001s
 
 tetrahedron-n4-k3
 cover size: 3
-leaf count: 3
+leaf count: 2
 
 real	0m0.004s
-user	0m0.002s
-sys	0m0.001s
+user	0m0.000s
+sys	0m0.003s
 
 thomassen-n34-k20
 cover size: 20
-leaf count: 70
+leaf count: 49
 
-real	0m0.004s
-user	0m0.001s
-sys	0m0.002s
+real	0m0.005s
+user	0m0.002s
+sys	0m0.001s
 
 tutte-coxeter-n30-k15
 cover size: 15
-leaf count: 37
+leaf count: 31
 
 real	0m0.004s
 user	0m0.000s
@@ -136,8 +136,8 @@ sys	0m0.003s
 
 wheel-n8-k5
 cover size: 5
-leaf count: 3
+leaf count: 2
 
 real	0m0.004s
-user	0m0.000s
+user	0m0.001s
 sys	0m0.002s

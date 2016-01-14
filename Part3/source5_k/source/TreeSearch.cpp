@@ -41,6 +41,8 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 			if(tmp->cover_Vertex.size()<=curr_min_cover.size())	//don't branch
 				curr_min_cover = tmp->cover_Vertex;
 			++leaf_count;
+			if(curr_min_cover.size() <= k)
+				return curr_min_cover;
 		} else if(tmp->cover_Vertex.size()<=curr_min_cover.size()){	//branch. No need if the current cover is already bigger than the min cover.
 			right_child = new TreeNode;
 			left_child = new TreeNode;
@@ -178,7 +180,7 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 
 void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
 	string first_arg = argv[1];
-
+	k = atoi(argv[3]);
 	if(first_arg == "-a"){
 		//read from file
 		string file_name;

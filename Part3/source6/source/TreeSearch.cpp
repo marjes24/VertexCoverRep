@@ -13,7 +13,7 @@
 using namespace std;
 int node_count = 0;
 
-vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
+vector<int> DFSCover(list<list<int> > graph,int edge_count, long int &leaf_count){
 	//Initial vertex cover of size max, filled with zeroes. Only for first comparison. 
 	int max_int = 10000;
 	vector<int> curr_min_cover(max_int);			//holds smallest cover currently found. To be returned. 
@@ -34,7 +34,7 @@ vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	while(!node_stack.empty()){		
 		tmp =  node_stack.top();
 		node_stack.pop();
-		degree_one_optimization(tmp->graph, tmp, tmp->cover_Vertex, graph, edge_count);		//add all degree 1 from graph to cover
+		degree_one_optimization(tmp->graph, tmp, tmp->cover_Vertex, graph, edge_count);  //run degreee one optimization function
 		V = largest_vertex(tmp->graph);
 
 		if(degree(V, tmp->graph) == 0){									
@@ -322,11 +322,10 @@ int degree(list<list<int> >::iterator V, list<list<int> > &Graph){
 		return (*V).size() - 1;
 }
 
-//change in vector to be array. if array[i] == 1 then  value i should be deleted from graph
 void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int> &curr_min_cover, list<list<int> > &Original_Graph, int edge_count){
 	vector<int> vertices_to_delete;
 	bool degree_one_found = false;
-	int delete_vertex [Graph.size()];
+	
 	while(Graph.size()>0){
 		degree_one_found = false;
 	 	list<list<int> >::iterator V = Graph.begin();	
@@ -342,7 +341,7 @@ void degree_one_optimization(list<list<int> > &Graph, TreeNode* node, vector<int
 			 	}
 		 	}
 	 	}
-
+	 	
 	 	if(degree_one_found == false)
 	 		break;
 	 	//delete degree 1 neighbors from graph

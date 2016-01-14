@@ -11,7 +11,7 @@ struct TreeNode{
 };
 
 
-std::vector<int> DFSCover(std::list<std::list<int> > graph, int edge_count, int &leaf_count);
+std::vector<int> DFSCover(std::list<std::list<int> > graph, int edge_count, long int &leaf_count);
 
 bool inVector(std::vector<int> &v,  int &n);
 

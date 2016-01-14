@@ -14,7 +14,7 @@ using namespace std;
 int node_count = 0;
 double total_time = 0;
 
-vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
+vector<int> DFSCover(list<list<int> > graph,int edge_count, long int &leaf_count){
 	//int max_int = numeric_limits<int>::max();
 	int max_int = 10000;
 	vector<int> curr_min_cover(max_int);//initiliaze for initial comparison //maybe fill it to max_int value?
