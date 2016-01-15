@@ -181,6 +181,7 @@ void make_child_graph(list<list<int> > &tmp_graph, TreeNode *right, TreeNode *le
 void read_graph(list<list<int> > &graph,int &edge_count,char* argv[]){
 	string first_arg = argv[1];
 	k = atoi(argv[3]);
+
 	if(first_arg == "-a"){
 		//read from file
 		string file_name;

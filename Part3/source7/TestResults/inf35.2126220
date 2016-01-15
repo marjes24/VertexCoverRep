@@ -1,0 +1,60 @@
+cover size: 885
+leaf count: 72646256
+
+real	37m57.834s
+user	37m57.879s
+sys	0m1.568s
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1731>
+Subject: Job 2126220: <inf35> in cluster <Main_Compute> Done
+
+Job <inf35> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1731>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source7/JobTestFiles> was used as the working directory.
+Started at Thu Jan 14 18:58:26 2016
+Results reported on Thu Jan 14 19:36:27 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J inf35
+
+#BSUB -L /bin/bash
+
+#BSUB -W 12:00
+
+#BSUB -o ../TestResults/inf35.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/influensa_0.35.dim.dim
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   2292.56 sec.
+    Max Memory :                                 464 MB
+    Average Memory :                             431.41 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4536.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+

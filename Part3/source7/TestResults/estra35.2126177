@@ -1,0 +1,60 @@
+cover size: 984
+leaf count: 476163827
+
+real	224m7.164s
+user	224m5.274s
+sys	0m6.644s
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1920>
+Subject: Job 2126177: <estra35> in cluster <Main_Compute> Done
+
+Job <estra35> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1920>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source7/JobTestFiles> was used as the working directory.
+Started at Thu Jan 14 13:53:25 2016
+Results reported on Thu Jan 14 17:37:34 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J estra35
+
+#BSUB -L /bin/bash
+
+#BSUB -W 12:00
+
+#BSUB -o ../TestResults/estra35.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/estradio_0.35.dim.dim
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   13507.08 sec.
+    Max Memory :                                 877 MB
+    Average Memory :                             831.11 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4123.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+
