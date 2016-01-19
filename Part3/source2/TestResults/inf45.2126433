@@ -1,32 +1,32 @@
-cover size: 985
-leaf count: 1187141087
+cover size: 888
+leaf count: 10956149
 
-real	666m37.198s
-user	666m52.971s
-sys	0m9.807s
+real	14m37.083s
+user	14m35.039s
+sys	0m2.178s
 
 ------------------------------------------------------------
 Sender: LSF System <lsfadmin@nxt1405>
-Subject: Job 2126400: <folic35> in cluster <Main_Compute> Done
+Subject: Job 2126433: <inf45> in cluster <Main_Compute> Done
 
-Job <folic35> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
+Job <inf45> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
 Job was executed on host(s) <nxt1405>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
 </home/mje72> was used as the home directory.
 </home/mje72/VertexCoverRep/Part3/source2/JobTestFiles> was used as the working directory.
-Started at Fri Jan 15 12:39:00 2016
-Results reported on Fri Jan 15 23:45:39 2016
+Started at Fri Jan 15 22:06:55 2016
+Results reported on Fri Jan 15 22:21:34 2016
 
 Your job looked like:
 
 ------------------------------------------------------------
 # LSBATCH: User input
-#BSUB -J folic35
+#BSUB -J inf45
 
 #BSUB -L /bin/bash
 
 #BSUB -W 12:00
 
-#BSUB -o ../TestResults/folic35.%J
+#BSUB -o ../TestResults/inf45.%J
 
 #BSUB -u mje72@mail.com
 
@@ -40,7 +40,7 @@ Your job looked like:
 module load intel
 
 # 
-time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.35.dim.dim
+time ../a.out -l ../../../../Vertex-Cover-MPI//data/PVC-Langston-2011/influensa_0.45.dim.dim 
 
 ------------------------------------------------------------
 
@@ -48,11 +48,11 @@ Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   40278.55 sec.
-    Max Memory :                                 1054 MB
-    Average Memory :                             1029.64 MB
+    CPU time :                                   883.91 sec.
+    Max Memory :                                 375 MB
+    Average Memory :                             305.14 MB
     Total Requested Memory :                     5000.00 MB
-    Delta Memory :                               3946.00 MB
+    Delta Memory :                               4625.00 MB
     Max Processes :                              4
     Max Threads :                                5
 

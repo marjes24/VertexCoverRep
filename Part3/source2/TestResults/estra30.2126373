@@ -1,0 +1,59 @@
+cover size: 982
+leaf count: 1921114292
+
+real	1054m38.183s
+user	1054m32.736s
+sys	0m32.593s
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1914>
+Subject: Job 2126373: <estra30> in cluster <Main_Compute> Done
+
+Job <estra30> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1914>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source2/JobTestFiles> was used as the working directory.
+Started at Fri Jan 15 07:20:07 2016
+Results reported on Sat Jan 16 00:54:47 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J estra30
+
+#BSUB -L /bin/bash
+
+#BSUB -W 24:00
+
+#BSUB -o ../TestResults/estra30.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/estradio_0.30.dim.dim
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   63667.64 sec.
+    Max Memory :                                 960 MB
+    Average Memory :                             938.53 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4040.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+

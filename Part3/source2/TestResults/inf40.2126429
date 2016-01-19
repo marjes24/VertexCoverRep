@@ -1,32 +1,32 @@
-cover size: 982
-leaf count: 3332283021
+cover size: 887
+leaf count: 26247051
 
-real	1053m24.006s
-user	1051m22.148s
-sys	0m23.427s
+real	25m53.093s
+user	25m44.223s
+sys	0m1.635s
 
 ------------------------------------------------------------
 Sender: LSF System <lsfadmin@nxt1234>
-Subject: Job 2126302: <estra30> in cluster <Main_Compute> Done
+Subject: Job 2126429: <inf40> in cluster <Main_Compute> Done
 
-Job <estra30> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
+Job <inf40> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
 Job was executed on host(s) <nxt1234>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
 </home/mje72> was used as the home directory.
-</home/mje72/VertexCoverRep/Part3/source1/JobTestFiles> was used as the working directory.
-Started at Thu Jan 14 20:02:38 2016
-Results reported on Fri Jan 15 13:36:05 2016
+</home/mje72/VertexCoverRep/Part3/source2/JobTestFiles> was used as the working directory.
+Started at Fri Jan 15 21:49:21 2016
+Results reported on Fri Jan 15 22:15:16 2016
 
 Your job looked like:
 
 ------------------------------------------------------------
 # LSBATCH: User input
-#BSUB -J estra30
+#BSUB -J inf40
 
 #BSUB -L /bin/bash
 
-#BSUB -W 24:00
+#BSUB -W 12:00
 
-#BSUB -o ../TestResults/estra30.%J
+#BSUB -o ../TestResults/inf40.%J
 
 #BSUB -u mje72@mail.com
 
@@ -36,10 +36,11 @@ Your job looked like:
 #BSUB -R "rusage[mem=5000]"
 #BSUB -R 'select[nxt]'
   
+  
 module load intel
 
 # 
-time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/estradio_0.30.dim.dim
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/influensa_0.40.dim.dim
 
 ------------------------------------------------------------
 
@@ -47,11 +48,11 @@ Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   63401.86 sec.
-    Max Memory :                                 954 MB
-    Average Memory :                             933.64 MB
+    CPU time :                                   1552.13 sec.
+    Max Memory :                                 420 MB
+    Average Memory :                             375.96 MB
     Total Requested Memory :                     5000.00 MB
-    Delta Memory :                               4046.00 MB
+    Delta Memory :                               4580.00 MB
     Max Processes :                              4
     Max Threads :                                5
 
