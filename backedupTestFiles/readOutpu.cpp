@@ -1,11 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 int main(int argc, char* argv[]){
 
-	ifstream ifs;
+	system("grep \"real\" ./*");
+	return 0;
+}
+
+double average(string filename){
+	/*ifstream ifs;
 	ifs.open(argv[1]);
 	stringstream ss;
 	string line;
@@ -24,6 +30,6 @@ int main(int argc, char* argv[]){
 		//cout<<line<<endl;;
 	}
 
-	ifs.close();
+	ifs.close();*/
 	return 0;
 }
