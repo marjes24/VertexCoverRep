@@ -135,7 +135,7 @@ double convert_time_to_double(string time_string){ //format 234m1.35s
 string seconds_to_string_format(double time){
 	int minutes = (int) time;
 	minutes = minutes / 60;
-	double seconds = time - minutes;
+	double seconds = time - minutes*60;
 	string minute_string = to_string(minutes);
 	string seconds_string = to_string(seconds);
 
