@@ -1,0 +1,60 @@
+cover size: 887
+leaf count: 26286998
+
+real	23m7.487s
+user	23m6.164s
+sys	0m1.634s
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1572>
+Subject: Job 2123197: <inf40> in cluster <Main_Compute> Done
+
+Job <inf40> was submitted from host <login3> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1572>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source6/JobTestFiles> was used as the working directory.
+Started at Wed Jan 13 19:54:13 2016
+Results reported on Wed Jan 13 20:17:23 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J inf40
+
+#BSUB -L /bin/bash
+
+#BSUB -W 12:00
+
+#BSUB -o ../TestResults/inf40.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/influensa_0.40.dim.dim
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1394.97 sec.
+    Max Memory :                                 420 MB
+    Average Memory :                             369.36 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4580.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+

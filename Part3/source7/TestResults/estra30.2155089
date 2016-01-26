@@ -1,0 +1,54 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1960>
+Subject: Job 2155089: <estra30> in cluster <Main_Compute> Exited
+
+Job <estra30> was submitted from host <login8> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1960>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source1/JobTestFiles> was used as the working directory.
+Started at Fri Jan 22 13:45:33 2016
+Results reported on Fri Jan 22 13:46:43 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J estra30
+
+#BSUB -L /bin/bash
+
+#BSUB -W 24:00
+
+#BSUB -o ../TestResults/estra30.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/estradio_0.30.dim.dim
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 130.
+
+Resource usage summary:
+
+    CPU time :                                   68.78 sec.
+    Max Memory :                                 24 MB
+    Average Memory :                             15.11 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4976.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+

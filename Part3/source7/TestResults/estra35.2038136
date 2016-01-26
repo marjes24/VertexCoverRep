@@ -1,0 +1,59 @@
+	NOTE: As of 4/1/2015, MKLROOT defined in this module has been changed
+	From: /software/easybuild/software/imkl/11.2.2.164-iimpi-7.2.5-GCC-4.9.2
+	  To: /software/easybuild/software/imkl/11.2.2.164-iimpi-7.2.5-GCC-4.9.2/mkl
+cover size: 984
+leaf count: 768181526
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1756>
+Subject: Job 2038136: <estra35> in cluster <Main_Compute> Done
+
+Job <estra35> was submitted from host <login3> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1756>, in queue <sn_regular>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source1/JobTestFiles> was used as the working directory.
+Started at Tue Dec  1 09:53:52 2015
+Results reported on Tue Dec  1 15:14:09 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J estra35
+
+#BSUB -L /bin/bash
+
+#BSUB -W 12:00
+
+#BSUB -o ../TestResults/estra35.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+  
+module load intel
+
+# 
+../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/estradio_0.35.dim.dim
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   19355.17 sec.
+    Max Memory :                                 878 MB
+    Average Memory :                             850.88 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4122.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+

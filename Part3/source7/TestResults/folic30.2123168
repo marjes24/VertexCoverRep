@@ -1,0 +1,61 @@
+cover size: 983
+leaf count: 5217205091
+
+real	1806m19.602s
+user	1807m6.533s
+sys	0m40.565s
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1235>
+Subject: Job 2123168: <folic30> in cluster <Main_Compute> Done
+
+Job <folic30> was submitted from host <login3> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1235>, in queue <sn_long>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source6/JobTestFiles> was used as the working directory.
+Started at Wed Jan 13 15:19:43 2016
+Results reported on Thu Jan 14 21:26:06 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J folic30
+
+#BSUB -L /bin/bash
+
+#BSUB -W 36:00
+
+#BSUB -o ../TestResults/folic30.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.30.dim.dim
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   108986.67 sec.
+    Max Memory :                                 1137 MB
+    Average Memory :                             1096.71 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               3863.00 MB
+    Max Swap :                                   1 MB
+    Max Processes :                              5
+    Max Threads :                                6
+
+The output (if any) is above this job summary.
+

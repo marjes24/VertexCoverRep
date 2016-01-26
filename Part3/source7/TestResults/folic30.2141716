@@ -1,0 +1,56 @@
+User defined signal 2
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@nxt1302>
+Subject: Job 2141716: <folic30> in cluster <Main_Compute> Exited
+
+Job <folic30> was submitted from host <login2> by user <mje72> in cluster <Main_Compute>.
+Job was executed on host(s) <nxt1302>, in queue <sn_long>, as user <mje72> in cluster <Main_Compute>.
+</home/mje72> was used as the home directory.
+</home/mje72/VertexCoverRep/Part3/source4/JobTestFiles> was used as the working directory.
+Started at Tue Jan 19 13:59:48 2016
+Results reported on Thu Jan 21 01:59:50 2016
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J folic30
+
+#BSUB -L /bin/bash
+
+#BSUB -W 36:00
+
+#BSUB -o ../TestResults/folic30.%J
+
+#BSUB -u mje72@mail.com
+
+#BSUB -n 1
+#BSUB -R "span[ptile=1]" 
+#BSUB -M 5000
+#BSUB -R "rusage[mem=5000]"
+#BSUB -R 'select[nxt]'
+  
+  
+module load intel
+
+# 
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.30.dim.dim
+
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time :                                   130288.05 sec.
+    Max Memory :                                 1137 MB
+    Average Memory :                             1115.88 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               3863.00 MB
+    Max Processes :                              4
+    Max Threads :                                5
+
+The output (if any) is above this job summary.
+
