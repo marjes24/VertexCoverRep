@@ -18,4 +18,4 @@
 module load intel
 
 # 
-time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.40.dim.dim
+time ../a.out -l ../../../../Vertex-Cover-MPI/data/PVC-Langston-2011/folic_0.40.dim.dim 986

@@ -12,7 +12,7 @@
 
 using namespace std;
 int node_count = 0;
-int k = 0; //Find Vertex Cover of at most size k
+extern int k = 0; //Find Vertex Cover of at most size k
 
 vector<int> DFSCover(list<list<int> > graph,int edge_count, int &leaf_count){
 	//Initial vertex cover of size max, filled with zeroes. Only for first comparison. 

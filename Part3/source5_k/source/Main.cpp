@@ -21,7 +21,10 @@ int main(int argc, char* argv[]){
 	vector<int> answer = DFSCover(graph, edge_count, leaf_count);
 
 	if(isCover(graph, answer, edge_count)){
-		cout<<"cover size: "<<answer.size()<<endl;
+		if(answer.size() <= k)
+			cout<<"cover size: "<<answer.size()<<endl;
+		else
+			cout<<"cover of at most size " << k << " not found";
 		cout<<"leaf count: "<<leaf_count<<endl;
 	} else {
 		cout<<"Cover not found"<<endl;
